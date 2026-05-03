@@ -3,7 +3,7 @@
   "displayName": "R XPath Generator",
   "description": "Generate smart XPath & CSS selectors from HTML — with visual preview panel, element tree sidebar, and code snippets for Selenium, Playwright & Cypress.",
   "version": "0.0.1",
-  "publisher": "undefined-publisher",
+  "publisher": "Kashish-dev",
   "license": "MIT",
   "icon": "images/icon.png",
   "galleryBanner": {

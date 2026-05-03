@@ -4,6 +4,22 @@
 
 ---
 
+## Screenshots
+
+### Visual HTML Preview Panel
+![HTML Preview Panel](images/screenshots/preview-panel.png)
+
+### Element Tree Sidebar
+![Element Tree Sidebar](images/screenshots/element-tree.png)
+
+### Ranked XPath QuickPick
+![XPath QuickPick](images/screenshots/quickpick.png)
+
+### Framework Code Snippet
+![Code Snippet Copy](images/screenshots/snippet-copy.png)
+
+---
+
 ## Why This Extension?
 
 Browser DevTools are great for inspecting live pages — but when you're writing tests, you're already in your editor. This extension brings the **inspect-and-locate workflow directly into VS Code**:

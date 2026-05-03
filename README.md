@@ -316,8 +316,8 @@ Switch anytime via Command Palette → **XPath: Set Framework**.
 
 Found a bug or want to suggest a feature?
 
-- [Open an issue](https://github.com/YOUR-USERNAME/r-xpath-generator/issues)
-- [View source on GitHub](https://github.com/YOUR-USERNAME/r-xpath-generator)
+- [Open an issue](https://github.com/Kashish-Goyal-94/r-xpath-generator/issues)
+- [View source on GitHub](https://github.com/Kashish-Goyal-94/r-xpath-generator)
 
 ---
 

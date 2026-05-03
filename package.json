@@ -1,0 +1,240 @@
+{
+  "name": "r-xpath-generator",
+  "displayName": "R XPath Generator",
+  "description": "Generate smart XPath & CSS selectors from HTML — with visual preview panel, element tree sidebar, and code snippets for Selenium, Playwright & Cypress.",
+  "version": "0.0.1",
+  "publisher": "undefined-publisher",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR-USERNAME/r-xpath-generator"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR-USERNAME/r-xpath-generator/issues"
+  },
+  "homepage": "https://github.com/YOUR-USERNAME/r-xpath-generator#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Testing",
+    "Other"
+  ],
+  "keywords": [
+    "xpath",
+    "css selector",
+    "test automation",
+    "selenium",
+    "playwright",
+    "cypress",
+    "html",
+    "locator",
+    "qa"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "r-xpath-sidebar",
+          "title": "XPath Generator",
+          "icon": "images/sidebar-icon.svg"
+        }
+      ]
+    },
+
+    "views": {
+      "r-xpath-sidebar": [
+        {
+          "id": "rXpathElementTree",
+          "name": "Element Tree",
+          "icon": "images/sidebar-icon.svg",
+          "contextualTitle": "HTML Elements"
+        }
+      ]
+    },
+
+    "commands": [
+      {
+        "command": "r-xpath-generator.generateXPath",
+        "title": "Generate Smart XPath",
+        "category": "XPath",
+        "shortTitle": "Gen XPath"
+      },
+      {
+        "command": "r-xpath-generator.openPreview",
+        "title": "Open HTML Preview",
+        "category": "XPath",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "r-xpath-generator.exportXPaths",
+        "title": "Export XPaths to JSON",
+        "category": "XPath",
+        "icon": "$(export)"
+      },
+      {
+        "command": "r-xpath-generator.setFramework",
+        "title": "Set Framework",
+        "category": "XPath",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "r-xpath-generator.refreshTree",
+        "title": "Refresh Element Tree",
+        "category": "XPath",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "r-xpath-generator.generateFromTree",
+        "title": "Generate XPath",
+        "category": "XPath",
+        "icon": "$(wand)"
+      }
+    ],
+
+    "menus": {
+      "editor/title": [
+        {
+          "command": "r-xpath-generator.openPreview",
+          "when": "resourceLangId =~ /html|xml|javascriptreact|typescriptreact/",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "r-xpath-generator.generateXPath",
+          "when": "editorHasSelection && resourceLangId =~ /html|xml|javascriptreact|typescriptreact/",
+          "group": "9_cutcopypaste@10"
+        },
+        {
+          "command": "r-xpath-generator.openPreview",
+          "when": "resourceLangId =~ /html|xml|javascriptreact|typescriptreact/",
+          "group": "9_cutcopypaste@11"
+        },
+        {
+          "command": "r-xpath-generator.exportXPaths",
+          "when": "editorHasSelection && resourceLangId =~ /html|xml|javascriptreact|typescriptreact/",
+          "group": "9_cutcopypaste@12"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "r-xpath-generator.refreshTree",
+          "when": "view == rXpathElementTree",
+          "group": "navigation"
+        },
+        {
+          "command": "r-xpath-generator.setFramework",
+          "when": "view == rXpathElementTree",
+          "group": "navigation"
+        },
+        {
+          "command": "r-xpath-generator.openPreview",
+          "when": "view == rXpathElementTree",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "r-xpath-generator.generateFromTree",
+          "when": "view == rXpathElementTree && viewItem == htmlElement",
+          "group": "inline"
+        }
+      ]
+    },
+
+    "keybindings": [
+      {
+        "command": "r-xpath-generator.generateXPath",
+        "key": "ctrl+shift+x",
+        "mac": "cmd+shift+x",
+        "when": "editorHasSelection && resourceLangId =~ /html|xml|javascriptreact|typescriptreact/"
+      },
+      {
+        "command": "r-xpath-generator.openPreview",
+        "key": "ctrl+shift+p",
+        "mac": "cmd+shift+p",
+        "when": "resourceLangId =~ /html|xml|javascriptreact|typescriptreact/"
+      },
+      {
+        "command": "r-xpath-generator.exportXPaths",
+        "key": "ctrl+shift+e",
+        "mac": "cmd+shift+e",
+        "when": "editorHasSelection && resourceLangId =~ /html|xml|javascriptreact|typescriptreact/"
+      }
+    ],
+
+    "configuration": {
+      "title": "R XPath Generator",
+      "properties": {
+        "rXpathGenerator.framework": {
+          "type": "string",
+          "default": "selenium-python",
+          "enum": [
+            "selenium-python",
+            "selenium-java",
+            "playwright-ts",
+            "playwright-python",
+            "cypress"
+          ],
+          "enumDescriptions": [
+            "Selenium with Python — driver.find_element(By.XPATH, ...)",
+            "Selenium with Java — driver.findElement(By.xpath(...))",
+            "Playwright TypeScript — page.locator('xpath=...')",
+            "Playwright Python — page.locator(\"xpath=...\")",
+            "Cypress — cy.xpath(...) / cy.get(...)"
+          ],
+          "description": "Target framework for code snippet generation"
+        },
+        "rXpathGenerator.maxResults": {
+          "type": "number",
+          "default": 6,
+          "minimum": 3,
+          "maximum": 10,
+          "description": "Maximum number of XPath suggestions to show"
+        },
+        "rXpathGenerator.autoRefreshTree": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically refresh the element tree when the document is saved"
+        }
+      }
+    }
+  },
+
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.39.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  }
+}
